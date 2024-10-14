@@ -1,11 +1,38 @@
-install pychar, community 
+instsall python - from https://www.python.org/downloads/
+
+install pycharm - community 
+
+pip install pipenv
+pip3 install requests
 
 add pipenv predfrences by   "pip install pipenv"
-pip install pipenv
+
 pipenv shell  , this create  pip file
+
+download olama from :   https://ollama.com/download
+
+install the exe
+
+cd C:\Users\dror\AppData\Local\Programs\ollama
+
+add to path 
+
+cmd:  ollama list
+
+no model found 
+
+ollama pull llama
+
+http://localhost:11434    -  get that is running
+
+ נא להחזיר תשובה בעברית , ספר לי בקצרה על תעשיית התפוזים בישראל
+
+=============
+for lang chain :
 pipenv install langchain
 pipenv install langchain-openai 
 pipenv install langchain-community
 pipenv install langchaihub
 pipenv install black //formater
 pipenv install python-dotenv
+
