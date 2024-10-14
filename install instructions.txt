@@ -1,0 +1,11 @@
+install pychar, community 
+
+add pipenv predfrences by   "pip install pipenv"
+pip install pipenv
+pipenv shell  , this create  pip file
+pipenv install langchain
+pipenv install langchain-openai 
+pipenv install langchain-community
+pipenv install langchaihub
+pipenv install black //formater
+pipenv install python-dotenv
