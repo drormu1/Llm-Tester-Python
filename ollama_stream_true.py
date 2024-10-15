@@ -2,7 +2,6 @@ import requests
 import time
 import json
 
-
 def ask_ollama(question):
     url = "http://localhost:11434/api/generate"
     data = {
@@ -13,7 +12,8 @@ def ask_ollama(question):
     try:
         start_time = time.time()  # Start timing
 
-        response = requests.post(url, json=data, stream=True)
+        # Send the POST request without streaming
+        response = requests.post(url, json=data, stream=False)
 
         # Measure the time taken for the POST request
         duration = time.time() - start_time
@@ -21,13 +21,15 @@ def ask_ollama(question):
 
         # Check for successful response
         if response.status_code == 200:
+            # Split the response into lines and parse each line as JSON
             answer = ""
-            # Iterate over each line in the response
-            for line in response.iter_lines():
-                if line:  # If line is not empty
-                    json_line = line.decode('utf-8')  # Decode bytes to string
-                    response_data = json.loads(json_line)
-                    answer += response_data.get("response", "")  # Accumulate response parts
+            for line in response.text.splitlines():
+                if line.strip():  # Ignore empty lines
+                    try:
+                        response_data = json.loads(line)
+                        answer += response_data.get("response", "")
+                    except json.JSONDecodeError:
+                        print(f"Skipping invalid JSON line: {line}")
 
             duration = time.time() - start_time
             print(f"TOTAL : {duration:.2f} seconds")
@@ -37,8 +39,6 @@ def ask_ollama(question):
 
     except requests.exceptions.RequestException as e:
         return f"Connection error: {e}"
-
-
 
 if __name__ == "__main__":
     question = input("Ask Ollama: ")
